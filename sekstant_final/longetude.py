@@ -21,7 +21,7 @@ except serial.SerialException:
 
 # GPIO setup
 DIR1, STEP1, DIR2, STEP2 = 20, 21, 8, 7
-CW, CCW = 0, 1
+CW, CCW = 1, 0
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(DIR1, GPIO.OUT)
@@ -32,7 +32,7 @@ GPIO.setup(STEP2, GPIO.OUT)
 delay = 0.005
 
 # PI controller constants and variables
-Kp, Ki = 1, 0.000
+Kp, Ki = 0.5, 0.005
 integral1, integral2 = 0, 0
 prev_error1, prev_error2 = 0, 0
 smooth_ldr1, smooth_ldr2, smooth_ldr3, smooth_ldr4 = 0, 0, 0, 0
@@ -57,7 +57,7 @@ def pi_control(target, prev_error, integral):
     error = target
     integral += error
     output = Kp * error + Ki * integral
-    max_step = 100
+    max_step = 50
     output = max(-max_step, min(max_step, output))
     return output, error, integral
 
