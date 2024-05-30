@@ -140,7 +140,7 @@ class MainWindow(QWidget):
         self.layout.addWidget(self.quitButton)
 
         self.setLayout(self.layout)
-        self.setWindowTitle('IMU and Motor Control Monitor')
+        self.setWindowTitle('Longetude')
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_clock)
         self.timer.start(1000)
